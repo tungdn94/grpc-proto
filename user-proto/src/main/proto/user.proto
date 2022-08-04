@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "tung.daongoc.user";
+
+service UserSerivce{
+  rpc AddUserInfo (AddUserInfoRequest) returns (AddUserInfoResponse);
+  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc UpdateUserInfo (UpdateUserInfoRequest) returns (UpdateUserInfoResponse);
+  rpc DeleteUserInfo (DeleteUserInfoRequest) returns (DeleteUserInfoResponse);
+}
+
+message AddUserInfoRequest{
+  string name = 1;
+  string job = 2;
+  int32 salary = 3;
+  Gender gender = 4;
+}
+
+message AddUserInfoResponse{
+  ResponseCode code = 1;
+  string message = 2;
+}
+
+message GetUserInfoRequest{
+  int32 id = 1;
+}
+
+message GetUserInfoResponse{
+  ResponseCode code = 1;
+  UserInfo user_info = 2;
+}
+
+message UpdateUserInfoRequest{
+  UserInfo update_info = 1;
+}
+
+message UpdateUserInfoResponse{
+  ResponseCode code = 1;
+  UserInfo update_info = 2;
+}
+
+message DeleteUserInfoRequest{
+  int32 id = 1;
+}
+
+message DeleteUserInfoResponse{
+  ResponseCode code = 1;
+  string message = 2;
+}
+
+
+
+
+message UserInfo{
+  int32 id = 1;
+  string name = 2;
+  string job = 3;
+  int32 salary = 4;
+  Gender gender = 5;
+}
+
+enum Gender{
+  MALE = 0;
+  FEMALE = 1;
+  OTHERS = 2;
+}
+
+enum ResponseCode{
+  SUCCESS = 0;
+  FAIL = 1;
+}
